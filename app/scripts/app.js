@@ -2,17 +2,19 @@
 /* jshint -W004 */
 
 import { createStore } from 'redux';
-import MenuView from './view-menu.js';
+import menuView from './view-menu.js';
+import menuItemView from './view-menu-item.js';
+import orderConfirmationView from './view-order-confirmation.js';
 
 export default function app() {
 
+  const menuUrl = 'https://tiy-austin-front-end-engineering.github.io/restaurantApi/fancy.json';
   const $appContainer = $('#app');
 
   const initialState = {
-    currentUser: null,
-    loadingTodos: false,
+    menuItems: [],
     order: [],
-    view: MenuView
+    view: menuView
   };
 
   const reducer = function (currentState, action) {
@@ -23,65 +25,44 @@ export default function app() {
     switch(action.type) {
 
 
-      case 'LOGIN_USER':
-        var newState = {
-          loadingTodos: true,
-          currentUser: action.user,
-          // view: todoListView
-        };
-        $.getJSON(url).then((data) => {
-          store.dispatch({ type: 'TODOS_LOADED', order: data });
-        });
-        return Object.assign({}, currentState, newState);
-
-
-      case 'LOAD_TODOS':
-        $.getJSON(url).then((data) => {
-          store.dispatch({ type: 'TODOS_LOADED', order: data });
+      case 'LOAD_MENU':
+        // initial load of full menu items
+        $.getJSON(menuUrl).then( (data) => {
+          console.log('🥑 menu loaded: ', data, '\n---------- ');
+          store.dispatch({ type: "VIEW_MENU", menuItems: data });
         });
         return currentState;
 
 
-      case 'TODOS_LOADED':
+      case 'VIEW_MENU':
         var newState = {
-           order: action.order,
-           loadingTodos: false
+          menuItems: action.menuItems
         };
         return Object.assign({}, currentState, newState);
 
 
-      case 'CREATE_TODO':
-        $.ajax({
-          url: url,
-          type: 'POST',
-          dataType: 'JSON',
-          data: {
-            name: action.todo,
-            complete: false
-          }
-        }).then(function () {
-          store.dispatch({ type: 'LOAD_TODOS' });
-        });
+      case 'ADD_ITEM':
+        var newState = {};
+        return Object.assign({}, currentState, newState);
+
+
+      case 'PLACE_ORDER':
+        // do ajaxy stuff
+        // disable controls?
+        // callback to confirm order
         return currentState;
 
 
-      case 'DELETE_TODO':
-        var todo = action.todo;
-        $.ajax({
-          url: `${url}/${todo._id}`,
-          type: 'DELETE',
-        }).then((data) => {
-          store.dispatch({ type: 'LOAD_TODOS' });
-        });
-        return currentState;
-
-
-      case 'NOOP':
-        return currentState;
+      case 'CONFIRM_ORDER':
+        // set view to confirmation screen
+        var newState = {
+          view: orderConfirmationView
+        };
+        return Object.assign({}, currentState, newState);
 
 
       default:
-        console.debug('Unhandled action!', action.type);
+        console.debug('⚠️ reducer(): Unhandled action!', action.type);
         return currentState;
     }
   };
@@ -96,5 +77,5 @@ export default function app() {
 
   //The store will now run our 'render' function after every event is dispatched.
   store.subscribe(render);
-  store.dispatch({ type: 'NOOP' });
+  store.dispatch({ type: 'LOAD_MENU' });
 }

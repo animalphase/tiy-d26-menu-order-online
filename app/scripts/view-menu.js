@@ -1,9 +1,9 @@
 /* jshint -W138 */
 /* jshint -W004 */
 
-export default function MenuView(store) {
+export default function menuView(store) {
   let $viewContent = $(`<section class="page-wrapper view-menu">
-                          <header class="menu-header"><h1>Fancy Restaurant</h1></header>
+                          <header class="menu-header"><h1>Moonicorn Café</h1></header>
                         </section>`);
 
   let $menuSection = $(`<section class="menu">
