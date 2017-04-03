@@ -1,4 +1,22 @@
+# Order Food Online
 
-## Description
+## TIY Week 6, day 26
 
-> Describe your application here and what it does
+---
+
+**⭐️ live on surge: INSERT URL ⭐️**
+
+----
+
+### Features 💁🏻
+-
+
+### Libraries/tools used ⚒
+
+- ECMAscript 2016
+- jQuery
+- Sass
+  - Bourbon
+  - Neat
+- webpack
+- yarn

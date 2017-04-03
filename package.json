@@ -19,7 +19,10 @@
         "start": "webpack-dev-server --open"
     },
     "dependencies": {
+        "bourbon": "^4.3.4",
         "jquery": "^3.2.1",
+        "neat": "^1.2.2",
+        "node-neat": "^2.0.0-beta.0",
         "redux": "^3.6.0"
     }
 }

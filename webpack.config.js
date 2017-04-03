@@ -1,5 +1,7 @@
 const webpack           = require('webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const bourbon           = require('bourbon').includePaths;
+const neat              = require('node-neat').includePaths;
 
 var config = {
   context: __dirname + '/app',
@@ -28,7 +30,16 @@ var config = {
       test: /\.scss$/,
       use: ExtractTextPlugin.extract({
         fallback: 'style-loader',
-        use: ['css-loader', 'sass-loader'],
+        use: [
+          { loader: 'css-loader' },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+              includePaths: [ bourbon, neat ]
+            }
+          }
+        ],
         publicPath: '.'
       })
     },
