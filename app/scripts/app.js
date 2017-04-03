@@ -2,6 +2,8 @@
 /* jshint -W004 */
 
 import { createStore } from 'redux';
+import ajax from './ajax.js';
+import loadingMenuView from './view-loading-menu.js';
 import menuView from './view-menu.js';
 import menuItemView from './view-menu-item.js';
 import orderConfirmationView from './view-order-confirmation.js';
@@ -14,7 +16,7 @@ export default function app() {
   const initialState = {
     menuItems: [],
     order: [],
-    view: menuView
+    view: loadingMenuView
   };
 
   const reducer = function (currentState, action) {
@@ -22,21 +24,19 @@ export default function app() {
       return initialState;
     }
 
+    // 'action' comes in. check its 'type' property to switch case
     switch(action.type) {
 
 
       case 'LOAD_MENU':
-        // initial load of full menu items
-        $.getJSON(menuUrl).then( (data) => {
-          console.log('🥑 menu loaded: ', data, '\n---------- ');
-          store.dispatch({ type: "VIEW_MENU", menuItems: data });
-        });
+        ajax.loadMenu(store);
         return currentState;
 
 
       case 'VIEW_MENU':
         var newState = {
-          menuItems: action.menuItems
+          menuItems: action.menuItems,
+          view: menuView
         };
         return Object.assign({}, currentState, newState);
 
