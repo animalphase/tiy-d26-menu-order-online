@@ -1,15 +1,24 @@
 
 .food-category {
-  margin-top: 3rem;
+  margin-top: 4rem;
   text-transform: capitalize;
 }
 
+.menu-item {
+  margin: 0 0 3rem 0;
+  position: relative;
+}
+
 .item-name {
-  display: inline-block;
+  display: inline-blok;
+  margin:0 4rem 1rem 0;
 }
 
 .item-price {
-  float: right;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
 }
 
 .item-description {
