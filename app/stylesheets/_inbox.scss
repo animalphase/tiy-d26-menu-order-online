@@ -50,6 +50,22 @@
   }
 }
 
+.order-summary {
+  max-width: 50rem;
+  margin: 5rem auto;
+  padding: 4rem;
+  box-shadow: 0 .2rem .3rem 0 #aaa;
+  border-top: .6rem solid;
+
+  h3 {
+    margin-top: 0 0 1rem 0;
+  }
+
+  .menu-item {
+    margin-bottom: 2rem;
+  }
+}
+
 .btn-place-order {
   display: block;
   width: 100%;

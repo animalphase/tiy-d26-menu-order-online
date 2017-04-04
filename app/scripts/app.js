@@ -5,6 +5,7 @@ import { createStore } from 'redux';
 import ajax from './ajax.js';
 import loadingMenuView from './view-loading-menu.js';
 import menuView from './view-menu.js';
+import sendingOrderView from './view-sending-order.js';
 import orderConfirmationView from './view-order-confirmation.js';
 
 export default function app() {
@@ -70,12 +71,19 @@ export default function app() {
 
       case 'PLACE_ORDER':
         // do ajaxy stuff
-        // disable controls?
         // callback to confirm order
         console.log('PLACING ORDER');
-        $('button').prop('disabled', true);
-        return currentState;
+        var newState = {
+          view: sendingOrderView
+        };
+        ajax.sendOrder(store);
+        return Object.assign({}, currentState, newState);
 
+
+      case 'SENDING_ORDER':
+        // set view to confirmation screen
+        // console.log();
+        return currentState;
 
       case 'CONFIRM_ORDER':
         // set view to confirmation screen
