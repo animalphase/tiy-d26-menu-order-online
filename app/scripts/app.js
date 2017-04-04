@@ -15,6 +15,8 @@ export default function app() {
   const initialState = {
     menuItems: [],
     order: [],
+    orderTax: 0,
+    orderTotal: 0,
     view: loadingMenuView
   };
 
@@ -42,7 +44,27 @@ export default function app() {
 
 
       case 'ADD_ITEM':
-        var newState = {};
+        console.log('ACTION: ADD_ITEM');
+        console.log('name of object: ', action.menuItem.item);
+        console.log('current Order array: ', currentState.order);
+
+        let updatedOrder = currentState.order;
+        updatedOrder.push(action.menuItem);
+
+        let updatedOrderTotal = 0;
+        updatedOrder.forEach( (menuItem, i, array) => {
+          updatedOrderTotal += menuItem.price;
+        });
+
+        let taxAmount = updatedOrderTotal * 0.08;
+        updatedOrderTotal += taxAmount;
+
+        var newState = {
+          order: updatedOrder,
+          orderTax: taxAmount,
+          orderTotal: updatedOrderTotal
+        };
+        console.log(newState);
         return Object.assign({}, currentState, newState);
 
 
@@ -50,6 +72,8 @@ export default function app() {
         // do ajaxy stuff
         // disable controls?
         // callback to confirm order
+        console.log('PLACING ORDER');
+        $('button').prop('disabled', true);
         return currentState;
 
 

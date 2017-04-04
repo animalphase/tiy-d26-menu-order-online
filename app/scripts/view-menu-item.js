@@ -1,11 +1,17 @@
 /* jshint -W138 */
 /* jshint -W004 */
 
-export default function menuItemView(menuItem) {
+export default function menuItemView(store, thisMenuItem) {
   let $viewContent = $(`<div class="menu-item">
-                          <h4 class="item-name">${menuItem.item}</h4>
-                          <p class="item-price">${menuItem.price}</p>
-                          <p class="item-description">${menuItem.description}</p>
+                          <h4 class="item-name">${thisMenuItem.item}</h4>
+                          <p class="item-price">${thisMenuItem.price}</p>
+                          <p class="item-description">${thisMenuItem.description}</p>
+                          <button class="btn btn-add-to-order" type="button" name="button">Add to order</button>
                         </div>`);
+
+  $viewContent.find('.btn-add-to-order').on('click', () => {
+    store.dispatch({ type: 'ADD_ITEM', menuItem: thisMenuItem });
+  } );
+
   return $viewContent;
 }

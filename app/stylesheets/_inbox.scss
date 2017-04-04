@@ -1,3 +1,19 @@
+.page-wrapper {
+}
+
+.view-menu {
+}
+
+.menu-wrapper {
+}
+
+.menu {
+}
+
+.your-order {
+}
+
+
 
 .food-category {
   margin-top: 4rem;
@@ -5,7 +21,7 @@
 }
 
 .menu-item {
-  margin: 0 0 3rem 0;
+  margin: 0 0 5rem 0;
   position: relative;
 }
 
@@ -22,5 +38,56 @@
 }
 
 .item-description {
-  margin: 0 0 2rem 0;
+  margin: 0 0 1rem 0;
+}
+
+
+.your-order {
+  font-size: .8em;
+
+  .menu-item {
+    margin-bottom: 2rem;
+  }
+}
+
+.btn-place-order {
+  display: block;
+  width: 100%;
+  color: #fff;
+  background: #444;
+  box-shadow: 0 .2rem 0 0 #000;
+
+  &:hover {
+    background: #777;
+    box-shadow: 0 .2rem 0 0 #333;
+  }
+
+  &:disabled {
+    color: #bbb;
+    background: #f0f0f0;
+    box-shadow: 0 .2rem 0 0 #ddd;
+  }
+}
+
+
+@media only screen and (min-width: 30rem) {
+  .page-wrapper {
+
+  }
+
+  .view-menu {
+  }
+
+  .menu-wrapper {
+    display: flex;
+  }
+
+  .menu {
+    flex: 1;
+  }
+
+  .your-order {
+    width: 150rem;
+    padding-left: 4rem;
+  }
 }
