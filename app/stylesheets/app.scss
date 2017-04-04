@@ -1,2 +1,12 @@
 @import 'bourbon';
 @import 'neat';
+@import "base";
+@import "inbox";
+
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}

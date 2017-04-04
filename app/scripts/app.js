@@ -5,7 +5,6 @@ import { createStore } from 'redux';
 import ajax from './ajax.js';
 import loadingMenuView from './view-loading-menu.js';
 import menuView from './view-menu.js';
-import menuItemView from './view-menu-item.js';
 import orderConfirmationView from './view-order-confirmation.js';
 
 export default function app() {
@@ -38,7 +37,8 @@ export default function app() {
           menuItems: action.menuItems,
           view: menuView
         };
-        return Object.assign({}, currentState, newState);
+        newState = Object.assign({}, currentState, newState);
+        return newState;
 
 
       case 'ADD_ITEM':
